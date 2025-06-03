@@ -113,7 +113,7 @@ let
 
     cp --remove-destination /etc/resolv.conf "$root/etc/resolv.conf"
 
-    if [ -n "$FLAKE" ]; then
+    if [ -n "$FLAKE" ] && [ ! -e "/nix/var/nix/profiles/per-container/$INSTANCE/system" ]; then
       # we create the etc/nixos-container config file, then if we utilize the update function, we can then build all the necessary system files for the container
       ${nixos-container}/bin/nixos-container update "$INSTANCE"
     fi
