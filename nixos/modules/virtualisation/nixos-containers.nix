@@ -892,7 +892,7 @@ in
               {
                 path = builtins.seq checkAssertion mkMerge [
                   (mkIf options.config.isDefined config.config.system.build.toplevel)
-                  (mkIf (options.flake.value != null) "/nix/var/nix/profiles/per-container/${name}")
+                  (mkIf (config.flake != null) "/nix/var/nix/profiles/per-container/${name}")
                 ];
               };
           }
@@ -951,7 +951,7 @@ in
 
           path = [
             pkgs.iproute2
-            pkgs.nix
+            config.nix.package
           ];
 
           environment = {
